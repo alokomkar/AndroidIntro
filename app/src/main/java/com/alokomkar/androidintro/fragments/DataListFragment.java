@@ -1,5 +1,6 @@
-package com.alokomkar.androidintro;
+package com.alokomkar.androidintro.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,8 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import com.alokomkar.androidintro.R;
+import com.alokomkar.androidintro.adapters.DataRecyclerViewAdapter;
+import com.alokomkar.androidintro.listeners.AppNavigationListener;
 import com.alokomkar.androidintro.model.Data;
 
 import java.util.ArrayList;
@@ -20,9 +23,12 @@ import java.util.ArrayList;
 
 public class DataListFragment extends Fragment implements DataRecyclerViewAdapter.OnItemClickListener {
 
-    //1. Create a Fragment with basic list display of data [Display list of data using recyclerview]
+    // Create a Fragment with basic list display of data [Display list of data using recyclerview]
     private RecyclerView itemsRecyclerView;
     private DataRecyclerViewAdapter dataAdapter;
+
+    // Access communication interface created
+    private AppNavigationListener appNavigationListener;
 
     @Nullable
     @Override
@@ -54,6 +60,20 @@ public class DataListFragment extends Fragment implements DataRecyclerViewAdapte
     @Override
     public void onItemClick(int position) {
         Data data = dataAdapter.getItemAtPosition(position);
-        Toast.makeText(getContext(), data.toString(), Toast.LENGTH_SHORT).show();
+        appNavigationListener.loadDetailsFragment(data);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if( context instanceof AppNavigationListener ) {
+            appNavigationListener = (AppNavigationListener) context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        appNavigationListener = null;
     }
 }

@@ -1,4 +1,4 @@
-package com.alokomkar.androidintro;
+package com.alokomkar.androidintro.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.alokomkar.androidintro.R;
 import com.alokomkar.androidintro.model.Data;
 
 import java.util.ArrayList;
