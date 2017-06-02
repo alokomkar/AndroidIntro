@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements AppNavigationList
         mFragmentTransaction.commit();
     }
 
+    //Communicate the data to DetailsFragment from ListFragment
     @Override
     public void loadDetailsFragment(Data data) {
         setTitle( data.getItemName() );

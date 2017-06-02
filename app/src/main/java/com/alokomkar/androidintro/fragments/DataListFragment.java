@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 
 import com.alokomkar.androidintro.R;
 import com.alokomkar.androidintro.adapters.DataRecyclerViewAdapter;
+import com.alokomkar.androidintro.asynctasks.FileReaderTask;
 import com.alokomkar.androidintro.listeners.AppNavigationListener;
+import com.alokomkar.androidintro.listeners.OnDataReadListener;
 import com.alokomkar.androidintro.model.Data;
 
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
  * Created by Alok on 02/06/17.
  */
 
-public class DataListFragment extends Fragment implements DataRecyclerViewAdapter.OnItemClickListener {
+public class DataListFragment extends Fragment implements DataRecyclerViewAdapter.OnItemClickListener, OnDataReadListener {
 
     // Create a Fragment with basic list display of data [Display list of data using recyclerview]
     private RecyclerView itemsRecyclerView;
@@ -46,8 +48,7 @@ public class DataListFragment extends Fragment implements DataRecyclerViewAdapte
 
     //Fetch data from List
     private void fetchData() {
-        ArrayList<Data> dataArrayList = Data.getDataList();
-        setupRecyclerView( dataArrayList );
+        new FileReaderTask(getContext(), this).execute();
     }
 
     //Setup recyclerview
@@ -56,7 +57,6 @@ public class DataListFragment extends Fragment implements DataRecyclerViewAdapte
         itemsRecyclerView.setAdapter( dataAdapter );
     }
 
-    //Display toast with details of the data item clicked
     @Override
     public void onItemClick(int position) {
         Data data = dataAdapter.getItemAtPosition(position);
@@ -75,5 +75,10 @@ public class DataListFragment extends Fragment implements DataRecyclerViewAdapte
     public void onDetach() {
         super.onDetach();
         appNavigationListener = null;
+    }
+
+    @Override
+    public void onDataReadComplete(ArrayList<Data> dataArrayList) {
+        setupRecyclerView(dataArrayList);
     }
 }
