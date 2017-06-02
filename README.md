@@ -8,4 +8,4 @@ Basic Android Starter Kit
 5. Complete solution to the problem - usage of async task to perform background/ response based tasks
 
 # Presentation Link 
-https://docs.google.com/a/cognitiveclouds.com/presentation/d/1UT0mlq2Qf_-Wt_H1awUKZ2yKCp3E6kzGteJIRXyvtps/edit?usp=sharing
+https://docs.google.com/presentation/d/1Kpnwg2qOB14W4iWJu-wkv8NEMlNdviUMUYfXG0W72Q8/edit?usp=sharing
